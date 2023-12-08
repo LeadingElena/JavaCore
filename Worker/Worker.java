@@ -1,16 +1,6 @@
 package JavaCore.Worker;
 
 public class Worker {
-    @FunctionalInterface
-    public interface OnTaskDoneListener {
-        void onDone (String result);
-    }
-
-    @FunctionalInterface
-    public interface OnTaskErrorListener {
-        void onError (String result);
-    }
-
     private final OnTaskDoneListener callback;
     private final OnTaskErrorListener errorCallback;
     public Worker (OnTaskDoneListener callback, OnTaskErrorListener errorCallback) {
