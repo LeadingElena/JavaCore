@@ -1,4 +1,4 @@
-package JavaCore.Stream_API;
+package JavaCore.Stream_API.Number;
 
 import java.util.*;
 
