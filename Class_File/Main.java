@@ -1,106 +1,67 @@
 package JavaCore.Class_File;
 
 import java.io.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.nio.file.*;
+import java.util.*;
+import java.util.zip.*;
 
 public class Main {
     public static final String NAME_ZIP_FILE = "packedSaveFile";
 
     public static void main(String[] args) throws FileNotFoundException {
+        List<File> listDir = new ArrayList<>();
+        List<File> listFiles = new ArrayList<>();
+
         File dirGame = new File("C://users/Lena/Game");
+        listDir.add(dirGame);
 
         File dirSrc = new File("C://users/Lena/Game/src");
+        listDir.add(dirSrc);
         File dirRes = new File("C://users/Lena/Game/res");
+        listDir.add(dirRes);
         File dirSavegames = new File("C://users/Lena/Game/savegames");
+        listDir.add(dirSavegames);
 
         File dirTemp = new File("C://users/Lena/Game/temp");
+        listDir.add(dirTemp);
 
         File dirSrcMain = new File("C://users/Lena/Game/src/main");
+        listDir.add(dirSrcMain);
         File dirSrcTest = new File("C://users/Lena/Game/src/test");
+        listDir.add(dirSrcTest);
 
         File dirResDrawable = new File("C://users/Lena/Game/res/drawable");
+        listDir.add(dirResDrawable);
         File dirResVectors = new File("C://users/Lena/Game/res/drawable");
+        listDir.add(dirResVectors);
         File dirResIcons = new File("C://users/Lena/Game/res/icons");
+        listDir.add(dirResIcons);
 
         File fileMainMain = new File("C://users/Lena/Game/src/main", "Main.java");
+        listFiles.add(fileMainMain);
         File fileMainUtils = new File("C://users/Lena/Game/src/main", "Utils.java");
+        listFiles.add(fileMainUtils);
 
         File fileTempTemp = new File("C://users/Lena/Game/temp", "Temp.txt");
+        listFiles.add(fileTempTemp);
 
         StringBuilder sb = new StringBuilder();
 
+        for (File dir : listDir) {
+            if (dir.mkdir()) {
+                sb.append("Директория " + dir.getName() + " создана\n");
+            } else {
+                sb.append("Директория " + dir.getName() + " не создана\n");
+            }
+        }
+
         try {
-            if (dirGame.mkdir()) {
-                sb.append("Директория " + dirGame.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirSrc.getName() + " не создана\n");
-            }
-            if (dirSrc.mkdir()) {
-                sb.append("Директория " + dirSrc.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirSrc.getName() + " не создана\n");
-            }
-            if (dirRes.mkdir()) {
-                sb.append("Директория " + dirRes.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirRes.getName() + " не создана\n");
-            }
-            if (dirSavegames.mkdir()) {
-                sb.append("Директория " + dirSavegames.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirSavegames.getName() + " не создана\n");
-            }
-            if (dirTemp.mkdir()) {
-                sb.append("Директория " + dirTemp.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirTemp.getName() + " не создана\n");
-            }
-            if (dirSrcMain.mkdir()) {
-                sb.append("Директория " + dirSrcMain.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirSrcMain.getName() + " не создана\n");
-            }
-            if (dirSrcTest.mkdir()) {
-                sb.append("Директория " + dirSrcTest.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirSrcTest.getName() + " не создана\n");
-            }
-            if (dirResDrawable.mkdir()) {
-                sb.append("Директория " + dirResDrawable.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirResDrawable.getName() + " не создана\n");
-            }
-            if (dirResVectors.mkdir()) {
-                sb.append("Директория " + dirResVectors.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirResVectors.getName() + " не создана\n");
-            }
-            if (dirResIcons.mkdir()) {
-                sb.append("Директория " + dirResIcons.getName() + " создана\n");
-            } else {
-                sb.append("Директория " + dirResIcons.getName() + " не создана\n");
-            }
-            if (fileMainMain.createNewFile()) {
-                sb.append("Файл " + fileMainMain.getName() + " создан\n");
-            } else {
-                sb.append("Файл " + fileMainMain.getName() + " не создан\n");
-            }
-            if (fileMainUtils.createNewFile()) {
-                sb.append("Файл " + fileMainUtils.getName() + " создан\n");
-            } else {
-                sb.append("Файл " + fileMainUtils.getName() + " не создан\n");
-            }
-            if (fileTempTemp.createNewFile()) {
-                sb.append("Файл " + fileTempTemp.getName() + " создан\n");
-            } else {
-                sb.append("Файл " + fileTempTemp.getName() + " не создан\n");
+            for (File file : listFiles) {
+                if (file.createNewFile()) {
+                    sb.append("Файл " + file.getName() + " создан\n");
+                } else {
+                    sb.append("Файл " + file.getName() + " не создан\n");
+                }
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
